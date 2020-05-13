@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@500;700" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>Frontend Mentor | Job Listings</title>
+</head>
+<body>
+  <header></header>
+  <div id="app">
+    <section class="group col-group">
+      <ul class="filters">
+        <li v-for="filter in filters">
+          <span>{{filter.label}}</span>
+          <button @click="toggleFilter(filter.label, filter.type)">
+            <img src="./images/icon-remove.svg" alt="Remove this filter" />
+          </button>
+        </li>
+      </ul>
+      <button @click="filters = []">Clear</button>
+    </section>
+    <h1 class="visually-hidden">Jobs</h1>
+    <ul class="jobs">
+      <li v-for="job in visibleJobs" :key="job.id" class="col-group" :class="{ featured: job.featured }">
+        <div class="col-group">
+          <img class="logo-circle" :src="job.logo" :alt="job.company" />
+          <div>
+            <p class="company">{{job.company}}</p>
+            <span class="new" v-if="job.new">New!</span>
+            <span class="featured" v-if="job.featured">Featured</span>
+            <p class="position">{{job.position}}</p>
+            <ul class="metadata">
+              <li>{{job.postedAt}}</li>
+              <li>{{job.contract}}</li>
+              <li>{{job.location}}</li>
+            </ul>  
+          </div>
+        </div>
+        <div class="group">
+          <button @click="toggleFilter(job.role, 'role')">{{job.role}}</button>
+          <button @click="toggleFilter(job.level, 'level')">{{job.level}}</button>
+          <button @click="toggleFilter(language, 'languages')" v-if="job.languages.length" v-for="language in job.languages">{{language}}</button>
+          <button @click="toggleFilter(tool, 'tools')" v-if="job.tools.length" v-for="tool in job.tools">{{tool}}</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <p class="attribution">
+    <small>Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://rmion.com">Robert Mion</a>.</small>
+  </p>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
