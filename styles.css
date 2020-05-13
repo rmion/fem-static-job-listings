@@ -132,6 +132,9 @@
     white-space: nowrap; /* added line */
   }
   @media only screen and (min-width: 1280px) {
+    header {
+      background-image: url('./images/bg-header-desktop.svg');
+    }
     .col-group {
       display: flex;
       justify-content: space-between;
